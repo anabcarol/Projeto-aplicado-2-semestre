@@ -1,0 +1,73 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Caminho do arquivo
+csv_path = 'C:/Users/Ana Carolina/Desktop/walmart/walmart_stock_prices.csv'
+img_dir = 'C:/Users/Ana Carolina/Desktop/walmart/IMG/'
+csv_out_dir = 'C:/Users/Ana Carolina/Desktop/walmart/CSVNovo'
+
+#gerar gráfico e CSV a partir de datas
+def gerar_analise(df, data_inicio, data_fim, titulo, nome_arquivo):
+
+    #Filtrar o intervalo
+    df_filtered = df[(df['Date'] >= data_inicio) & (df['Date'] <= data_fim)].copy()
+
+    #Agrupar por AnoMês
+    df_filtered['YearMonth'] = df_filtered['Date'].dt.to_period('M')
+    monthly_avg = df_filtered.groupby('YearMonth')['Close'].mean().reset_index()
+    monthly_avg['YearMonth'] = monthly_avg['YearMonth'].astype(str)
+
+    #Variação percentual
+    monthly_avg['Variação %'] = monthly_avg['Close'].pct_change() * 100
+
+    #Regressão linear
+    X = np.arange(len(monthly_avg)).reshape(-1, 1)
+    y = monthly_avg['Close'].values
+    model = LinearRegression().fit(X, y)
+    monthly_avg['Tendência'] = model.predict(X)
+
+    #Gráfico
+    plt.figure(figsize=(14, 6))
+    plt.plot(monthly_avg['YearMonth'], monthly_avg['Close'], marker='o', label='Preço Médio', color='orange')
+    plt.plot(monthly_avg['YearMonth'], monthly_avg['Tendência'], color='red', linestyle='--', label='Tendência Linear')
+    plt.xticks(rotation=45)
+    plt.title(titulo)
+    plt.xlabel('Ano-Mês')
+    plt.ylabel('Preço Médio de Fechamento (USD)')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+
+    #Salvar imagem
+    plt.savefig(f'{img_dir}grafico_{nome_arquivo}.png')
+    plt.close()
+
+    # Salvar CSV
+    monthly_avg.to_csv(f'{csv_out_dir}media_mensal_precos_{nome_arquivo}.csv', index=False)
+
+
+# ------------------- Inicio Script -------------------
+
+#Carregar os dados
+df = pd.read_csv(csv_path)
+df['Date'] = pd.to_datetime(df['Date'], utc=True).dt.tz_convert(None)
+
+#Análise 2020 - 2023 (pós-pandemia)
+gerar_analise(
+    df,
+    data_inicio=pd.to_datetime('2020-03-01'),
+    data_fim=pd.to_datetime('2023-05-31'),
+    titulo='Variação Mensal do Preço Médio de Fechamento - Walmart\n(Março de 2020 a Maio de 2023)',
+    nome_arquivo='DepoisPandemia'
+)
+
+#Análise 2017 - 2019 (antes-pandemia)
+gerar_analise(
+    df,
+    data_inicio=pd.to_datetime('2017-03-01'),
+    data_fim=pd.to_datetime('2019-05-31'),
+    titulo='Variação Mensal do Preço Médio de Fechamento - Walmart\n(Março de 2017 a Maio de 2019)',
+    nome_arquivo='AntesPandemia'
+)
