@@ -35,14 +35,10 @@ A análise se concentra nos seguintes aspectos:
 ├── README.md           Documento explicativo do projeto
 └── requirements.txt     Lista de dependências do projeto
 
-Documento de estrutura do projeto 
-[https://docs.google.com/document/d/1YRPBgbjfm5mHRPS8YAMsctiORqbXy3w54FtLcmtlXc0/edit?tab=t.0](url)
+Documento de estrutura do projeto [link](https://docs.google.com/document/d/1YRPBgbjfm5mHRPS8YAMsctiORqbXy3w54FtLcmtlXc0/edit?tab=t.0)
 
-Cronograma 
-[https://docs.google.com/spreadsheets/d/1gFoNW3ZzSZPmSNMNsbDJu5Zv3R5ipOifsELXW9G9KJk/edit?gid=0#gid=0](url)
+Cronograma - [link](https://docs.google.com/spreadsheets/d/1gFoNW3ZzSZPmSNMNsbDJu5Zv3R5ipOifsELXW9G9KJk/edit?gid=0#gid=0)
 
-Data Set 
-[https://www.kaggle.com/datasets/meharshanali/walmart-stocks-data-2025](url)
+Data Set [link](https://www.kaggle.com/datasets/meharshanali/walmart-stocks-data-2025)
 
-Google Colab 
-[https://colab.research.google.com/drive/1BVU-DsnR8biC8RhUBw-ZMWF53eBP8wDr?usp=sharing](url)
+Google Colab [link](https://colab.research.google.com/drive/1BVU-DsnR8biC8RhUBw-ZMWF53eBP8wDr?usp=sharing)
