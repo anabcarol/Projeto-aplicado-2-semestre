@@ -42,3 +42,5 @@ Cronograma - [link](https://docs.google.com/spreadsheets/d/1gFoNW3ZzSZPmSNMNsbDJ
 Data Set [link](https://www.kaggle.com/datasets/meharshanali/walmart-stocks-data-2025)
 
 Google Colab [link](https://colab.research.google.com/drive/1BVU-DsnR8biC8RhUBw-ZMWF53eBP8wDr?usp=sharing)
+
+Gravação da apresentação - [link](https://youtu.be/NB9w9PU1kak)
